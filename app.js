@@ -21,7 +21,6 @@ const elements = {
   story: document.getElementById('entry-story'),
   fact: document.getElementById('entry-fact'),
   place: document.getElementById('entry-place'),
-  city: document.getElementById('entry-city'),
   category: document.getElementById('entry-category'),
   legend: document.getElementById('entry-legend'),
   fitRoute: document.getElementById('fit-route'),
@@ -249,8 +248,7 @@ function updateEntryCard(entry) {
   elements.title.textContent = entry.title;
   elements.story.textContent = entry.story;
   elements.fact.textContent = entry.fact;
-  elements.place.textContent = entry.place;
-  elements.city.textContent = entry.city || '—';
+  elements.place.textContent = `${entry.place}${entry.city ? `, ${entry.city}` : ''}`;
   elements.category.textContent = entry.category;
   elements.legend.textContent = entry.legend;
 }
