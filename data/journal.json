@@ -1,0 +1,80 @@
+{
+  "project": {
+    "title": "Roczna podróż naszej maskotki",
+    "schoolYear": "2025/2026"
+  },
+  "entries": [
+    {
+      "id": "2025-09-01-stavanger",
+      "date": "2025-09-01",
+      "host": "Rodzina Oli",
+      "country": "Norwegia",
+      "flag": "🇳🇴",
+      "city": "Stavanger",
+      "place": "Port w Stavanger",
+      "title": "Pierwszy przystanek: wiatr, mewy i łodzie",
+      "story": "Maskotka oglądała port, łódki i fale. Było trochę wietrznie, ale za to bardzo ciekawie.",
+      "fact": "Stavanger leży blisko morza. W takich miejscach często można zobaczyć porty, statki i mewy.",
+      "category": "Geografia",
+      "legend": "Jakie dźwięki można usłyszeć w porcie?",
+      "coordinates": [5.7331, 58.9690],
+      "zoom": 9.6,
+      "bearing": -24,
+      "image": "./images/placeholder.svg"
+    },
+    {
+      "id": "2025-10-10-gdansk",
+      "date": "2025-10-10",
+      "host": "Rodzina Kuby",
+      "country": "Polska",
+      "flag": "🇵🇱",
+      "city": "Gdańsk",
+      "place": "Stare Miasto w Gdańsku",
+      "title": "Spacer po starych uliczkach",
+      "story": "Maskotka spacerowała po starych uliczkach i oglądała kolorowe kamienice. Wszystko wyglądało trochę jak z bajki.",
+      "fact": "Stare miasto to najstarsza część miasta. Często są tam zabytki i budynki pamiętające dawne czasy.",
+      "category": "Historia i kultura",
+      "legend": "Czym różni się stary budynek od nowego?",
+      "coordinates": [18.6466, 54.3520],
+      "zoom": 9.2,
+      "bearing": -10,
+      "image": "./images/placeholder.svg"
+    },
+    {
+      "id": "2025-11-15-rome",
+      "date": "2025-11-15",
+      "host": "Rodzina Hani",
+      "country": "Włochy",
+      "flag": "🇮🇹",
+      "city": "Rzym",
+      "place": "Koloseum",
+      "title": "Bardzo stare miejsce, bardzo duża przygoda",
+      "story": "Maskotka odwiedziła słynne Koloseum i była bardzo zdziwiona, że taki ogromny budynek stoi tam od tylu lat.",
+      "fact": "Koloseum znajduje się w Rzymie. To jeden z najbardziej znanych zabytków z czasów starożytnego Rzymu.",
+      "category": "Kultura",
+      "legend": "Jak myślisz: dlaczego ludzie chronią zabytki?",
+      "coordinates": [12.4922, 41.8902],
+      "zoom": 10.5,
+      "bearing": 16,
+      "image": "./images/placeholder.svg"
+    },
+    {
+      "id": "2026-01-20-barcelona",
+      "date": "2026-01-20",
+      "host": "Rodzina Mai",
+      "country": "Hiszpania",
+      "flag": "🇪🇸",
+      "city": "Barcelona",
+      "place": "Park Güell",
+      "title": "Kolory, mozaiki i niezwykłe kształty",
+      "story": "Maskotka zobaczyła kolorowe mozaiki i bardzo dziwne, ale piękne budowle. To było jedno z najbardziej kolorowych miejsc w całej podróży.",
+      "fact": "Barcelona to miasto w Hiszpanii nad Morzem Śródziemnym. Znajduje się tam wiele niezwykłych budynków zaprojektowanych przez Antoniego Gaudíego.",
+      "category": "Sztuka i architektura",
+      "legend": "Jakie kolory zauważasz na zdjęciu?",
+      "coordinates": [2.1527, 41.4145],
+      "zoom": 11,
+      "bearing": -18,
+      "image": "./images/placeholder.svg"
+    }
+  ]
+}
