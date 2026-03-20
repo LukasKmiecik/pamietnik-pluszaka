@@ -8,6 +8,12 @@
       name="description"
       content="Interaktywny pamiętnik klasowej maskotki z mapą 3D, osią czasu i kartami podróży."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://unpkg.com" />
     <link
       rel="stylesheet"
@@ -16,9 +22,11 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">Pamiętnik klasowy</p>
+    <div class="scene-backdrop"></div>
+
+    <header class="site-header">
+      <div class="title-plaque">
+        <span class="eyebrow">Pamiętnik klasowy</span>
         <h1>Roczna podróż naszej maskotki</h1>
         <p class="subtitle">
           Jedna wielka mapa, jedna historia i wszystkie przygody maskotki z całego roku.
@@ -27,32 +35,46 @@
       <div class="stats" id="stats"></div>
     </header>
 
-    <main class="layout">
-      <section class="left-column">
-        <article class="hero-card">
-          <div class="hero-image-wrap">
-            <img
-              id="entry-image"
-              class="hero-image"
-              src="./images/placeholder.svg"
-              alt="Zdjęcie maskotki"
-            />
-            <span class="country-badge" id="country-badge">—</span>
+    <main class="book-shell">
+      <div class="book-spread">
+        <section class="left-page">
+          <div class="page-title-card">
+            <h2>Księżyczka naszej Maskotki</h2>
           </div>
 
-          <div class="hero-content">
-            <div class="hero-topline">
-              <span class="pill" id="entry-date">Data</span>
-              <span class="pill pill-soft" id="entry-host">Gospodarz</span>
+          <article class="photo-panel">
+            <div class="photo-frame">
+              <div class="hero-image-wrap">
+                <img
+                  id="entry-image"
+                  class="hero-image"
+                  src="./images/placeholder.svg"
+                  alt="Zdjęcie maskotki"
+                />
+                <span class="country-badge" id="country-badge">—</span>
+              </div>
+              <div class="photo-caption" id="entry-place">Wybierz pinezkę na mapie</div>
+            </div>
+          </article>
+
+          <section class="story-stack">
+            <div class="story-card story-card-main">
+              <div class="hero-topline">
+                <span class="pill" id="entry-date">Data</span>
+                <span class="pill pill-soft" id="entry-host">Gospodarz</span>
+              </div>
+
+              <h3 id="entry-title">Wybierz pinezkę na mapie</h3>
+              <p class="lead" id="entry-story">
+                Kliknij punkt na mapie po prawej stronie, aby zobaczyć zdjęcie, opis i ciekawostkę.
+              </p>
             </div>
 
-            <h2 id="entry-title">Wybierz pinezkę na mapie</h2>
-            <p class="lead" id="entry-story">
-              Kliknij punkt na mapie po prawej stronie, aby zobaczyć zdjęcie, opis i ciekawostkę.
-            </p>
-
-            <div class="fact-box">
-              <h3>Czy wiesz, że…</h3>
+            <div class="story-card fact-note">
+              <div class="fact-note-head">
+                <span class="fact-icon">★</span>
+                <h3>Ciekawostka</h3>
+              </div>
               <p id="entry-fact">
                 Ta strona jest przygotowana tak, żeby przez cały rok można było dodawać kolejne etapy podróży maskotki.
               </p>
@@ -60,54 +82,58 @@
 
             <div class="entry-meta">
               <div>
-                <span class="meta-label">Miejsce</span>
-                <strong id="entry-place">—</strong>
-              </div>
-              <div>
                 <span class="meta-label">Kategoria</span>
                 <strong id="entry-category">—</strong>
               </div>
               <div>
-                <span class="meta-label">Legenda / pytanie</span>
+                <span class="meta-label">Miasto</span>
+                <strong id="entry-city">—</strong>
+              </div>
+              <div>
+                <span class="meta-label">Pytanie do klasy</span>
                 <strong id="entry-legend">—</strong>
               </div>
             </div>
-          </div>
-        </article>
-
-        <section class="timeline-card">
-          <div class="section-head">
-            <h3>Oś czasu</h3>
-            <button class="ghost-button" id="play-route">Odtwórz podróż</button>
-          </div>
-          <div class="timeline" id="timeline"></div>
+          </section>
         </section>
-      </section>
 
-      <section class="map-column">
-        <div class="map-toolbar">
-          <div>
-            <h3>Mapa podróży</h3>
-            <p>Przeciągaj, przybliżaj i klikaj pinezki.</p>
+        <section class="right-page">
+          <div class="map-frame">
+            <div class="map-title-row">
+              <div>
+                <h2>Mapa podróży</h2>
+                <p>Przeciągaj, przybliżaj i klikaj pinezki.</p>
+              </div>
+              <div class="toolbar-actions">
+                <button class="toolbar-btn" id="fit-route">Pokaż całą trasę</button>
+                <button class="toolbar-btn" id="toggle-projection">Globus / mapa</button>
+              </div>
+            </div>
+            <div id="map"></div>
           </div>
-          <div class="toolbar-actions">
-            <button class="toolbar-btn" id="fit-route">Pokaż całą trasę</button>
-            <button class="toolbar-btn" id="toggle-projection">Globus / mapa</button>
+
+          <div class="bottom-row">
+            <section class="timeline-card">
+              <div class="section-head">
+                <h3>Oś czasu</h3>
+                <button class="ghost-button" id="play-route">Odtwórz podróż</button>
+              </div>
+              <div class="timeline" id="timeline"></div>
+            </section>
+
+            <aside class="help-card">
+              <h3>Jak dodać nowy etap</h3>
+              <ol>
+                <li>Dodaj zdjęcie do folderu <code>images/</code>.</li>
+                <li>Dopisz nowy wpis do pliku <code>data/journal.json</code>.</li>
+                <li>Wpisz współrzędne GPS ręcznie albo skopiuj je ze zdjęcia.</li>
+                <li>Wgraj zmiany do GitHuba — strona odświeży się automatycznie.</li>
+              </ol>
+            </aside>
           </div>
-        </div>
-        <div id="map"></div>
-      </section>
+        </section>
+      </div>
     </main>
-
-    <aside class="help-card">
-      <h3>Jak dodać nowy etap</h3>
-      <ol>
-        <li>Dodaj zdjęcie do folderu <code>images/</code>.</li>
-        <li>Dopisz nowy wpis do pliku <code>data/journal.json</code>.</li>
-        <li>Wpisz współrzędne GPS ręcznie albo skopiuj je ze zdjęcia.</li>
-        <li>Wgraj zmiany do GitHuba — strona odświeży się automatycznie.</li>
-      </ol>
-    </aside>
 
     <script src="https://unpkg.com/maplibre-gl@5.21.0/dist/maplibre-gl.js"></script>
     <script src="./app.js" type="module"></script>
