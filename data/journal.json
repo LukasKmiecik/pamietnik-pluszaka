@@ -1,22 +1,22 @@
 {
   "entries": [
     {
-      "bookTitle": "Książeczka naszej Maskotki",
-      "date": "12.09.2025",
-      "country": "Norway",
-      "city": "Stavanger",
-      "place": "Randaberg",
-      "image": "images/10bfa95f-b6c0-4888-b4a3-72df9cd7aa54.jfif",
-      "alt": "Maskotka we Wrocławiu",
-      "description": "Wrocław to piękne miasto na Dolnym Śląsku. Rynek to serce miasta, pełne kolorowych kamienic i zabytkowego ratusza. Wrocław nazywany jest też Miastem Mostów, bo ma ich naprawdę bardzo dużo.",
-      "factTitle": "Ciekawostka:",
-      "factIcon": "🧙",
-      "fact": "We Wrocławiu można spotkać słynne krasnale. Małe figurki skrzatów stoją w różnych częściach miasta.",
-      "map": {
-        "lat": 51.1079,
-        "lng": 17.0385
-      }
-    },
+  "bookTitle": "Książeczka naszej Maskotki",
+  "date": "12.09.2025",
+  "country": "Norwegia",
+  "city": "Stavanger",
+  "place": "Randaberg",
+  "image": "images/10bfa95f-b6c0-4888-b4a3-72df9cd7aa54.jfif",
+  "alt": "Maskotka w restauracji w Randaberg",
+  "description": "Maskotka odwiedziła restaurację w Randaberg niedaleko Stavanger. Na stole pojawiło się aromatyczne danie, a w środku było ciepło, kolorowo i bardzo przytulnie.",
+  "factTitle": "Ciekawostka:",
+  "factIcon": "🍛",
+  "fact": "W różnych miejscach świata ludzie jedzą inne potrawy i używają różnych przypraw. Poznawanie jedzenia to także poznawanie kultury.",
+  "map": {
+    "lat": 58.9993,
+    "lng": 5.6187
+  }
+},
     {
       "bookTitle": "Książeczka naszej Maskotki",
       "date": "28.09.2025",
