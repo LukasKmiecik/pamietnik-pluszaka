@@ -6,17 +6,15 @@
       "country": "Polska",
       "city": "Wrocław",
       "place": "Rynek",
-      "image": "images/10bfa95f-b6c0-4888-b4a3-72df9cd7aa54.jfif",
+      "image": "images/placeholder.svg",
       "alt": "Maskotka we Wrocławiu",
       "description": "Wrocław to piękne miasto na Dolnym Śląsku. Rynek to serce miasta, pełne kolorowych kamienic i zabytkowego ratusza. Wrocław nazywany jest też Miastem Mostów, bo ma ich naprawdę bardzo dużo.",
       "factTitle": "Ciekawostka:",
       "factIcon": "🧙",
-      "fact": "We Wrocławiu mieszkają krasnale. Małe figurki skrzatów można spotkać w całym mieście.",
+      "fact": "We Wrocławiu można spotkać słynne krasnale. Małe figurki skrzatów stoją w różnych częściach miasta.",
       "map": {
-        "x": 34,
-        "y": 33,
-        "svgX": 340,
-        "svgY": 260
+        "lat": 51.1079,
+        "lng": 17.0385
       }
     },
     {
@@ -32,10 +30,8 @@
       "factIcon": "⛰️",
       "fact": "W górach szczyty są wyższe niż wzgórza, a zimą często długo leży tam śnieg.",
       "map": {
-        "x": 52,
-        "y": 48,
-        "svgX": 520,
-        "svgY": 380
+        "lat": 50.7767,
+        "lng": 15.755
       }
     },
     {
@@ -51,10 +47,25 @@
       "factIcon": "🏰",
       "fact": "W wielu zamkach można zobaczyć wieże, dziedzińce i grube mury chroniące mieszkańców.",
       "map": {
-        "x": 69,
-        "y": 62,
-        "svgX": 700,
-        "svgY": 500
+        "lat": 50.4406,
+        "lng": 17.7647
+      }
+    },
+    {
+      "bookTitle": "Książeczka naszej Maskotki",
+      "date": "22.10.2025",
+      "country": "Norwegia",
+      "city": "Stavanger",
+      "place": "Port",
+      "image": "images/placeholder.svg",
+      "alt": "Maskotka w porcie w Stavanger",
+      "description": "Maskotka odwiedziła port i oglądała łodzie. Nad wodą było wietrznie, ale bardzo ciekawie, a w porcie można było zobaczyć różne jednostki pływające.",
+      "factTitle": "Ciekawostka:",
+      "factIcon": "⛵",
+      "fact": "Port to miejsce, gdzie zatrzymują się łodzie i statki. W miastach nad morzem porty są bardzo ważne.",
+      "map": {
+        "lat": 58.9701,
+        "lng": 5.7331
       }
     }
   ]
