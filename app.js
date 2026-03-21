@@ -107,6 +107,7 @@ function updateMarkerStates() {
 }
 
 function renderTimeline() {
+  if (!ui.timeline) return;
   ui.timeline.innerHTML = "";
 
   entries.forEach((entry, index) => {
@@ -233,6 +234,7 @@ async function loadData() {
     initMap();
     renderMap();
     renderEntry();
+    requestAnimationFrame(() => map && map.invalidateSize());
   } catch (error) {
     console.error(error);
     ui.entryCaption.textContent = "Błąd ładowania danych";
@@ -243,3 +245,10 @@ async function loadData() {
 
 bindEvents();
 loadData();
+
+
+window.addEventListener("resize", () => {
+  if (map) {
+    setTimeout(() => map.invalidateSize(), 120);
+  }
+});
