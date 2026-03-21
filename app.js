@@ -2,6 +2,7 @@ const DATA_URL = "data/journal.json";
 
 let entries = [];
 let currentIndex = 0;
+let currentPhotoIndex = 0;
 let playTimer = null;
 let map = null;
 let markers = [];
@@ -22,6 +23,10 @@ const ui = {
   prevBtn: document.getElementById("prevBtn"),
   nextBtn: document.getElementById("nextBtn"),
   playBtn: document.getElementById("playBtn"),
+  photoPrevBtn: document.getElementById("photoPrevBtn"),
+  photoNextBtn: document.getElementById("photoNextBtn"),
+  photoCounter: document.getElementById("photoCounter"),
+  photoThumbs: document.getElementById("photoThumbs"),
 };
 
 function createPinIcon(isActive = false) {
@@ -48,7 +53,7 @@ function initMap() {
 }
 
 function renderMap() {
-  markers.forEach((marker) => marker.remove());
+  markers.forEach((marker) => marker?.remove());
   markers = [];
 
   if (routeLine) {
@@ -105,14 +110,78 @@ function updateMarkerStates() {
   });
 }
 
+function getEntryImages(entry) {
+  if (!entry) return [];
+
+  if (Array.isArray(entry.image)) {
+    return entry.image.filter((item) => typeof item === "string" && item.trim() !== "");
+  }
+
+  if (typeof entry.image === "string" && entry.image.trim() !== "") {
+    return [entry.image];
+  }
+
+  return [];
+}
+
+function renderPhotoGallery() {
+  const entry = entries[currentIndex];
+  if (!entry) return;
+
+  const images = getEntryImages(entry);
+
+  if (!images.length) {
+    ui.entryImage.src = "";
+    ui.entryImage.alt = "Brak zdjęcia";
+    ui.photoPrevBtn.classList.add("hidden");
+    ui.photoNextBtn.classList.add("hidden");
+    ui.photoCounter.classList.add("hidden");
+    ui.photoThumbs.classList.add("hidden");
+    ui.photoThumbs.innerHTML = "";
+    return;
+  }
+
+  if (currentPhotoIndex < 0) currentPhotoIndex = 0;
+  if (currentPhotoIndex >= images.length) currentPhotoIndex = 0;
+
+  ui.entryImage.src = images[currentPhotoIndex];
+  ui.entryImage.alt = entry.alt || entry.place || "Zdjęcie maskotki";
+
+  const manyPhotos = images.length > 1;
+
+  ui.photoPrevBtn.classList.toggle("hidden", !manyPhotos);
+  ui.photoNextBtn.classList.toggle("hidden", !manyPhotos);
+  ui.photoCounter.classList.toggle("hidden", !manyPhotos);
+  ui.photoThumbs.classList.toggle("hidden", !manyPhotos);
+
+  ui.photoCounter.textContent = `${currentPhotoIndex + 1} / ${images.length}`;
+
+  ui.photoThumbs.innerHTML = "";
+
+  if (manyPhotos) {
+    images.forEach((src, index) => {
+      const thumbBtn = document.createElement("button");
+      thumbBtn.type = "button";
+      thumbBtn.className = `photo-thumb ${index === currentPhotoIndex ? "active" : ""}`;
+      thumbBtn.setAttribute("aria-label", `Pokaż zdjęcie ${index + 1}`);
+
+      thumbBtn.innerHTML = `<img src="${src}" alt="Miniatura ${index + 1}" />`;
+
+      thumbBtn.addEventListener("click", () => {
+        currentPhotoIndex = index;
+        renderPhotoGallery();
+      });
+
+      ui.photoThumbs.appendChild(thumbBtn);
+    });
+  }
+}
 
 function renderEntry() {
   const entry = entries[currentIndex];
   if (!entry) return;
 
   ui.bookTitle.textContent = entry.bookTitle || "Książeczka naszej Maskotki";
-  ui.entryImage.src = entry.image;
-  ui.entryImage.alt = entry.alt || entry.place || "Zdjęcie maskotki";
   ui.entryCaption.textContent = `${entry.city} - ${entry.place}`;
   ui.entryDescription.textContent = entry.description;
   ui.factIcon.textContent = entry.factIcon || "🌍";
@@ -123,6 +192,7 @@ function renderEntry() {
   ui.entryDate.textContent = entry.date;
   ui.mapSubtitle.textContent = `${currentIndex + 1} / ${entries.length} etapów podróży`;
 
+  renderPhotoGallery();
   updateMarkerStates();
 
   if (map && entry.map?.lat && entry.map?.lng) {
@@ -142,8 +212,26 @@ function renderEntry() {
 function setCurrentEntry(index) {
   if (index < 0) index = entries.length - 1;
   if (index >= entries.length) index = 0;
+
   currentIndex = index;
+  currentPhotoIndex = 0;
   renderEntry();
+}
+
+function showPrevPhoto() {
+  const images = getEntryImages(entries[currentIndex]);
+  if (images.length <= 1) return;
+
+  currentPhotoIndex = (currentPhotoIndex - 1 + images.length) % images.length;
+  renderPhotoGallery();
+}
+
+function showNextPhoto() {
+  const images = getEntryImages(entries[currentIndex]);
+  if (images.length <= 1) return;
+
+  currentPhotoIndex = (currentPhotoIndex + 1) % images.length;
+  renderPhotoGallery();
 }
 
 function startPlayback() {
@@ -181,6 +269,22 @@ function bindEvents() {
       startPlayback();
     }
   });
+
+  ui.photoPrevBtn.addEventListener("click", showPrevPhoto);
+  ui.photoNextBtn.addEventListener("click", showNextPhoto);
+
+  document.addEventListener("keydown", (event) => {
+    const images = getEntryImages(entries[currentIndex]);
+    if (images.length <= 1) return;
+
+    if (event.key === "ArrowLeft") {
+      showPrevPhoto();
+    }
+
+    if (event.key === "ArrowRight") {
+      showNextPhoto();
+    }
+  });
 }
 
 function escapeHtml(value) {
@@ -210,7 +314,10 @@ async function loadData() {
     initMap();
     renderMap();
     renderEntry();
-    requestAnimationFrame(() => map && map.invalidateSize());
+
+    requestAnimationFrame(() => {
+      if (map) map.invalidateSize();
+    });
   } catch (error) {
     console.error(error);
     ui.entryCaption.textContent = "Błąd ładowania danych";
@@ -221,7 +328,6 @@ async function loadData() {
 
 bindEvents();
 loadData();
-
 
 window.addEventListener("resize", () => {
   if (map) {
