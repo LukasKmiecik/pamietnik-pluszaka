@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Książeczka naszej Maskotki</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -41,7 +48,7 @@
 
       <!-- PRAWA STRONA -->
       <section class="page right-page">
-        <div class="map-frame" id="mapFrame">
+        <div class="map-frame">
           <div class="map-overlay"></div>
 
           <div class="map-header">
@@ -49,36 +56,7 @@
             <div class="map-subtitle" id="mapSubtitle">Rok przygód maskotki</div>
           </div>
 
-          <div id="mapCanvas" class="map-canvas">
-            <svg class="route-svg" id="routeSvg" viewBox="0 0 1000 800" preserveAspectRatio="none">
-              <path
-                id="routePathBg"
-                d=""
-                fill="none"
-                stroke="#755d0d"
-                stroke-width="3"
-                stroke-linecap="round"
-                stroke-dasharray="18 12"
-                opacity="0.5"
-              />
-              <path
-                id="routePath"
-                d=""
-                fill="none"
-                stroke="#f4c433"
-                stroke-width="14"
-                stroke-linecap="round"
-                stroke-dasharray="18 12"
-              />
-            </svg>
-
-            <div id="pinsLayer"></div>
-          </div>
-
-          <div class="zoom-controls">
-            <button class="zoom-btn" id="zoomInBtn" type="button">+</button>
-            <button class="zoom-btn" id="zoomOutBtn" type="button">−</button>
-          </div>
+          <div id="realMap" class="real-map" aria-label="Mapa podróży maskotki"></div>
 
           <div class="map-footer">
             <button class="nav-btn" id="prevBtn" type="button">← Wstecz</button>
@@ -95,6 +73,11 @@
     </section>
   </div>
 
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
   <script src="app.js"></script>
 </body>
 </html>
