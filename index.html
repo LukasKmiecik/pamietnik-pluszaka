@@ -14,63 +14,156 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="book">
-    <div class="spread">
-      <!-- LEWA STRONA -->
-      <section class="page left-page">
-        <div class="title-ribbon" id="bookTitle">Książeczka naszej Maskotki</div>
+  <div class="book-shell">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="editorPanel">
+      ☰ Menu wpisu
+    </button>
 
-        <div class="photo-card">
-          <img id="entryImage" src="images/placeholder.svg" alt="Zdjęcie maskotki" />
-          <div class="photo-caption" id="entryCaption">Ładowanie...</div>
+    <aside class="editor-panel" id="editorPanel" aria-hidden="true">
+      <div class="editor-header">
+        <div>
+          <div class="editor-title">Menu dodawania wpisu</div>
+          <div class="editor-subtitle">To menu pomaga przygotować nowy wpis do <code>journal.json</code>.</div>
+        </div>
+        <button class="editor-close" id="menuClose" type="button" aria-label="Zamknij menu">✕</button>
+      </div>
+
+      <div class="editor-note">
+        Ta strona działa statycznie na GitHub Pages. To znaczy, że możesz tu przygotować wpis, podejrzeć go i pobrać zaktualizowany plik JSON, ale samo zdjęcie nadal trzeba dodać do folderu <code>images</code> w repo.
+      </div>
+
+      <form class="editor-form" id="entryForm">
+        <label>
+          Data
+          <input type="text" id="formDate" placeholder="np. 22.10.2025" />
+        </label>
+
+        <label>
+          Kraj
+          <input type="text" id="formCountry" placeholder="np. Norwegia" />
+        </label>
+
+        <label>
+          Miasto
+          <input type="text" id="formCity" placeholder="np. Stavanger" />
+        </label>
+
+        <label>
+          Miejsce
+          <input type="text" id="formPlace" placeholder="np. Port" />
+        </label>
+
+        <label>
+          Ścieżka do zdjęcia w repo
+          <input type="text" id="formImage" placeholder="images/moje-zdjecie.jpg" />
+        </label>
+
+        <label>
+          Albo wybierz zdjęcie lokalnie do podglądu
+          <input type="file" id="formImageFile" accept="image/*" />
+        </label>
+
+        <label>
+          Opis miejsca
+          <textarea id="formDescription" rows="4" placeholder="Krótki opis tego, co robiła maskotka."></textarea>
+        </label>
+
+        <label>
+          Emoji ciekawostki
+          <input type="text" id="formFactIcon" placeholder="np. 🍛" maxlength="4" />
+        </label>
+
+        <label>
+          Tytuł ciekawostki
+          <input type="text" id="formFactTitle" placeholder="Ciekawostka:" />
+        </label>
+
+        <label>
+          Treść ciekawostki
+          <textarea id="formFact" rows="3" placeholder="Jedno krótkie zdanie edukacyjne."></textarea>
+        </label>
+
+        <div class="editor-grid">
+          <label>
+            Latitude
+            <input type="number" step="any" id="formLat" placeholder="58.9701" />
+          </label>
+
+          <label>
+            Longitude
+            <input type="number" step="any" id="formLng" placeholder="5.7331" />
+          </label>
         </div>
 
-        <div class="note-box">
-          <p id="entryDescription">
-            Trwa ładowanie opisu podróży...
-          </p>
+        <label>
+          Tekst alternatywny zdjęcia
+          <input type="text" id="formAlt" placeholder="Maskotka w porcie w Stavanger" />
+        </label>
 
-          <div class="fact-box">
-            <div class="fact-icon" id="factIcon">🌍</div>
-            <div class="fact-title" id="factTitle">Ciekawostka:</div>
-            <div class="fact-text" id="factText">
-              Trwa ładowanie ciekawostki...
+        <div class="editor-actions">
+          <button type="button" class="editor-btn" id="previewEntryBtn">Pokaż podgląd</button>
+          <button type="button" class="editor-btn secondary" id="copyEntryBtn">Kopiuj wpis JSON</button>
+          <button type="button" class="editor-btn secondary" id="downloadJsonBtn">Pobierz nowy journal.json</button>
+        </div>
+
+        <label>
+          Wygenerowany wpis JSON
+          <textarea id="generatedJson" rows="10" readonly></textarea>
+        </label>
+      </form>
+    </aside>
+
+    <div class="book" id="bookRoot">
+      <div class="spread">
+        <section class="page left-page">
+          <div class="title-ribbon" id="bookTitle">Książeczka naszej Maskotki</div>
+
+          <div class="photo-card">
+            <img id="entryImage" src="images/10bfa95f-b6c0-4888-b4a3-72df9cd7aa54.jfif" alt="Zdjęcie maskotki" />
+            <div class="photo-caption" id="entryCaption">Ładowanie...</div>
+          </div>
+
+          <div class="note-box">
+            <p id="entryDescription">
+              Trwa ładowanie opisu podróży...
+            </p>
+
+            <div class="fact-box">
+              <div class="fact-icon" id="factIcon">🌍</div>
+              <div class="fact-title" id="factTitle">Ciekawostka:</div>
+              <div class="fact-text" id="factText">
+                Trwa ładowanie ciekawostki...
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="entry-meta">
-          <div class="meta-pill" id="entryCountry">Kraj</div>
-          <div class="meta-pill" id="entryCity">Miasto</div>
-          <div class="meta-pill" id="entryDate">Data</div>
-        </div>
-      </section>
-
-      <!-- PRAWA STRONA -->
-      <section class="page right-page">
-        <div class="map-frame">
-          <div class="map-overlay"></div>
-
-          <div class="map-header">
-            <div class="map-title">Mapa Podróży</div>
-            <div class="map-subtitle" id="mapSubtitle">Rok przygód maskotki</div>
+          <div class="entry-meta">
+            <div class="meta-pill" id="entryCountry">Kraj</div>
+            <div class="meta-pill" id="entryCity">Miasto</div>
+            <div class="meta-pill" id="entryDate">Data</div>
           </div>
+        </section>
 
-          <div id="realMap" class="real-map" aria-label="Mapa podróży maskotki"></div>
+        <section class="page right-page">
+          <div class="map-frame">
+            <div class="map-overlay"></div>
 
-          <div class="map-footer">
-            <button class="nav-btn" id="prevBtn" type="button">← Wstecz</button>
-            <button class="nav-btn primary" id="playBtn" type="button">Odtwórz podróż</button>
-            <button class="nav-btn" id="nextBtn" type="button">Dalej →</button>
+            <div class="map-header">
+              <div class="map-title">Mapa Podróży</div>
+              <div class="map-subtitle" id="mapSubtitle">Rok przygód maskotki</div>
+            </div>
+
+            <div id="realMap" class="real-map" aria-label="Mapa podróży maskotki"></div>
+
+            <div class="map-footer">
+              <button class="nav-btn" id="prevBtn" type="button">← Wstecz</button>
+              <button class="nav-btn primary" id="playBtn" type="button">Odtwórz podróż</button>
+              <button class="nav-btn" id="nextBtn" type="button">Dalej →</button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
-
-    <section class="timeline-panel">
-      <div class="timeline-title">Oś czasu maskotki</div>
-      <div class="timeline" id="timeline"></div>
-    </section>
   </div>
 
   <script

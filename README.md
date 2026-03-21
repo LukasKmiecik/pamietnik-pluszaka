@@ -1,41 +1,37 @@
 # Pamiętnik Pluszaka
 
-Interaktywna strona w formie książeczki i mapy podróży klasowej maskotki.  
-Projekt działa jako statyczna strona internetowa i może być hostowany na GitHub Pages.
+Interaktywna strona w formie książeczki i mapy podróży klasowej maskotki.
 
-## Co robi ta strona
+## Co jest w tej wersji
 
-Strona pokazuje:
-- zdjęcie maskotki,
-- opis miejsca,
-- ciekawostkę edukacyjną,
-- kraj, miasto i datę,
-- interaktywną mapę z punktami podróży,
-- oś czasu z kolejnymi etapami.
+- responsywny układ książki,
+- interaktywna mapa Leaflet,
+- sztywny układ zdjęcia i opisu,
+- ukryta oś czasu,
+- boczne menu do przygotowania nowych wpisów do `journal.json`.
 
-Po kliknięciu punktu na mapie albo elementu osi czasu zmienia się aktywny wpis po lewej stronie.
+## Ważne
 
-## Technologie
+To nadal jest **strona statyczna**.
 
-Projekt korzysta z:
-- HTML
-- CSS
-- JavaScript
-- Leaflet
-- OpenStreetMap
+To znaczy:
+- możesz podejrzeć nowy wpis w panelu,
+- możesz skopiować gotowy JSON,
+- możesz pobrać nowy plik `journal.json`,
+- ale zdjęcia nadal trzeba ręcznie dodać do folderu `images` w repo.
+
+## Jak dodać nowy wpis
+
+1. Kliknij **Menu wpisu**.
+2. Uzupełnij pola formularza.
+3. Kliknij **Pokaż podgląd**.
+4. Kliknij **Kopiuj wpis JSON** albo **Pobierz nowy journal.json**.
+5. Dodaj zdjęcie do folderu `images` i zaktualizowany `journal.json` do repo.
 
 ## Struktura projektu
 
-```text
-pamietnik-pluszaka-main/
-├── index.html
-├── styles.css
-├── app.js
-├── README.md
-├── data/
-│   └── journal.json
-└── images/
-    ├── placeholder.svg
-    ├── 10bfa95f-b6c0-4888-b4a3-72df9cd7aa54.jfif
-    ├── dde6fa73-982b-4344-80d5-b8d7c6996bae.jfif
-    └── ...
+- `index.html` — układ strony
+- `styles.css` — wygląd książki i panelu
+- `app.js` — logika mapy i menu wpisu
+- `data/journal.json` — dane podróży
+- `images/` — zdjęcia maskotki
