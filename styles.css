@@ -156,9 +156,13 @@ body::after {
   background: #fff;
   border: 1px solid #d5d0c7;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
-  padding: 14px 14px 8px;
+  padding: 14px 14px 10px;
   width: 94%;
   margin: 0 auto 18px;
+}
+
+.photo-viewer {
+  position: relative;
 }
 
 .photo-card img {
@@ -171,6 +175,51 @@ body::after {
   background: #ddd;
 }
 
+.photo-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(76, 58, 45, 0.82);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 5;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.photo-nav:hover {
+  background: rgba(111, 74, 47, 0.95);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.photo-nav-prev {
+  left: 12px;
+}
+
+.photo-nav-next {
+  right: 12px;
+}
+
+.photo-counter {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(245, 235, 220, 0.95);
+  color: var(--ink);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+}
+
 .photo-caption {
   text-align: center;
   font-size: clamp(18px, 1.5vw, 32px);
@@ -181,6 +230,42 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.photo-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.photo-thumb {
+  border: 2px solid transparent;
+  background: transparent;
+  padding: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  flex: 0 0 auto;
+  overflow: hidden;
+  width: 76px;
+  height: 58px;
+}
+
+.photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-thumb.active {
+  border-color: #b96b37;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.hidden {
+  display: none !important;
 }
 
 .note-box {
@@ -333,9 +418,9 @@ body::after {
 
 .map-footer {
   position: absolute;
-  right: 18px;
+  right: 22px;
   bottom: 16px;
-  left: 18px;
+  left: 22px;
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -348,18 +433,20 @@ body::after {
   border: 2px solid rgba(90, 40, 10, 0.25);
   border-radius: 10px;
   padding: 12px 18px;
-  font-size: clamp(15px, 1vw, 21px);
+  font-size: clamp(16px, 1vw, 21px);
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-  min-height: 48px;
+  min-height: 50px;
 }
 
 .nav-btn.primary {
   background: linear-gradient(#d88447, #a85f2e);
 }
 
-.nav-btn:hover { filter: brightness(1.05); }
+.nav-btn:hover {
+  filter: brightness(1.05);
+}
 
 .leaflet-container {
   width: 100%;
@@ -431,31 +518,15 @@ body::after {
   margin: 10px 12px;
 }
 
-.timeline-panel {
-  display: none;
-}
-
-@media (max-width: 1280px) {
-  .book {
-    width: min(1480px, 98vw);
-  }
-
-  .spread {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  }
-}
-
 @media (max-width: 1100px) {
   body {
     padding: 12px;
     align-items: flex-start;
-    justify-content: center;
   }
 
   .book {
     width: min(100%, 980px);
-    min-height: auto;
-    padding: 18px;
+    min-height: 100vh;
   }
 
   .book::before {
@@ -464,68 +535,41 @@ body::after {
 
   .spread {
     grid-template-columns: 1fr;
-    gap: 18px;
     min-height: auto;
   }
 
   .page {
-    min-height: 0;
-  }
-
-  .left-page {
-    min-height: auto;
-  }
-
-  .photo-card {
-    width: 100%;
-    margin-bottom: 14px;
-  }
-
-  .note-box,
-  .entry-meta {
-    width: 100%;
-  }
-
-  .note-box {
-    min-height: 180px;
-    max-height: 260px;
+    min-height: 720px;
   }
 
   .right-page {
-    min-height: 68vh;
+    min-height: 640px;
   }
 
   .map-frame {
-    inset: 14px;
+    position: absolute;
+    inset: 18px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
   body {
     padding: 10px;
   }
 
   .book {
-    width: 100%;
     padding: 12px;
     border-width: 5px;
-    border-radius: 14px;
   }
 
   .page {
     padding: 12px;
-    border-radius: 10px;
-  }
-
-  .page::before {
-    inset: 7px;
+    min-height: auto;
   }
 
   .title-ribbon {
     font-size: 24px;
     padding: 10px 18px;
-    max-width: 100%;
-    width: fit-content;
   }
 
   .title-ribbon::before,
@@ -533,22 +577,20 @@ body::after {
     display: none;
   }
 
-  .photo-card img {
-    aspect-ratio: 4 / 3;
+  .photo-nav {
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
   }
 
-  .photo-caption {
-    font-size: 22px;
-    min-height: auto;
+  .photo-thumb {
+    width: 64px;
+    height: 50px;
   }
 
   .note-box {
+    width: 100%;
     padding: 20px 14px 14px;
-    max-height: none;
-  }
-
-  .note-box::before {
-    width: 150px;
   }
 
   .fact-box {
@@ -559,89 +601,23 @@ body::after {
     display: none;
   }
 
-  .right-page {
-    min-height: 62vh;
+  .entry-meta {
+    width: 100%;
   }
 
   .map-header {
-    top: 12px;
-    left: 12px;
-    padding: 9px 12px;
-    max-width: calc(100% - 82px);
-  }
-
-  .map-title {
-    font-size: 20px;
-  }
-
-  .map-subtitle {
-    font-size: 13px;
-  }
-
-  .leaflet-control-zoom {
-    margin-top: 74px !important;
-    margin-right: 10px !important;
-  }
-
-  .leaflet-top.leaflet-right .leaflet-control-zoom a {
-    width: 38px;
-    height: 38px;
-    line-height: 38px;
-    font-size: 22px;
+    max-width: calc(100% - 90px);
   }
 
   .map-footer {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
     flex-direction: column;
   }
 
   .nav-btn {
     width: 100%;
-    min-height: 46px;
-    font-size: 16px;
-    padding: 10px 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .book {
-    padding: 10px;
-  }
-
-  .spread {
-    gap: 14px;
-  }
-
-  .title-ribbon {
-    font-size: 20px;
-    padding: 10px 14px;
-  }
-
-  .photo-card {
-    padding: 10px 10px 6px;
-  }
-
-  .photo-caption {
-    font-size: 18px;
-  }
-
-  .note-box p,
-  .fact-text {
-    font-size: 14px;
-  }
-
-  .fact-title {
-    font-size: 18px;
-  }
-
-  .meta-pill {
-    font-size: 12px;
-    padding: 7px 12px;
   }
 
   .right-page {
-    min-height: 56vh;
+    min-height: 560px;
   }
 }
