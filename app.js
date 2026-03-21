@@ -19,7 +19,6 @@ const ui = {
   entryCity: document.getElementById("entryCity"),
   entryDate: document.getElementById("entryDate"),
   mapSubtitle: document.getElementById("mapSubtitle"),
-  timeline: document.getElementById("timeline"),
   prevBtn: document.getElementById("prevBtn"),
   nextBtn: document.getElementById("nextBtn"),
   playBtn: document.getElementById("playBtn"),
@@ -106,28 +105,6 @@ function updateMarkerStates() {
   });
 }
 
-function renderTimeline() {
-  if (!ui.timeline) return;
-  ui.timeline.innerHTML = "";
-
-  entries.forEach((entry, index) => {
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = `timeline-item ${index === currentIndex ? "active" : ""}`;
-    item.innerHTML = `
-      <div class="timeline-date">${escapeHtml(entry.date)}</div>
-      <div class="timeline-place">${escapeHtml(entry.place)}</div>
-      <div class="timeline-country">${escapeHtml(entry.country)} • ${escapeHtml(entry.city)}</div>
-    `;
-
-    item.addEventListener("click", () => {
-      stopPlayback();
-      setCurrentEntry(index);
-    });
-
-    ui.timeline.appendChild(item);
-  });
-}
 
 function renderEntry() {
   const entry = entries[currentIndex];
@@ -146,7 +123,6 @@ function renderEntry() {
   ui.entryDate.textContent = entry.date;
   ui.mapSubtitle.textContent = `${currentIndex + 1} / ${entries.length} etapów podróży`;
 
-  renderTimeline();
   updateMarkerStates();
 
   if (map && entry.map?.lat && entry.map?.lng) {
