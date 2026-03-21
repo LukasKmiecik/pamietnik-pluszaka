@@ -21,8 +21,22 @@
         <div class="title-ribbon" id="bookTitle">Książeczka naszej Maskotki</div>
 
         <div class="photo-card">
-          <img id="entryImage" src="images/placeholder.svg" alt="Zdjęcie maskotki" />
+          <div class="photo-viewer">
+            <img id="entryImage" src="" alt="Zdjęcie maskotki" />
+
+            <button class="photo-nav photo-nav-prev hidden" id="photoPrevBtn" type="button" aria-label="Poprzednie zdjęcie">
+              ←
+            </button>
+            <button class="photo-nav photo-nav-next hidden" id="photoNextBtn" type="button" aria-label="Następne zdjęcie">
+              →
+            </button>
+
+            <div class="photo-counter hidden" id="photoCounter">1 / 1</div>
+          </div>
+
           <div class="photo-caption" id="entryCaption">Ładowanie...</div>
+
+          <div class="photo-thumbs hidden" id="photoThumbs"></div>
         </div>
 
         <div class="note-box">
